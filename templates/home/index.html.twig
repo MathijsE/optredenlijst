@@ -3,4 +3,64 @@
 {% block title %}Index{% endblock %}
 
 {% block body %}
+    <h2>Verlopen optredens</h2>
+    <div class="row">
+        <div class="col">
+            {% for optreden in optredens %}
+                {% if optreden.datum < date() %}
+                    <div class="card" style="width: 18rem;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Naam artiest: {{ optreden.artiestId.naam }}</li>
+                            <li class="list-group-item">Datum optreden: {{ optreden.datum|date('d-m-y') }}</li>
+                            <li class="list-group-item">Tijd optreden: {{ optreden.datum|date(' m:i:s') }}</li>
+                            <li class="list-group-item">Zaal: {{ optreden.zaal }}</li></li>
+                            <li class="list-group-item">Zitplaatsen: {{ optreden.maxZitplaatsen }}</li></li>
+                            <li class="list-group-item">Prijs: &euro;{{ optreden.artiestId.prijs }}</li></li>
+                        </ul>
+                    </div>
+        </div>
+                {% endif %}
+            {% endfor %}
+    </div>
+
+    <h2>Alle optredens</h2>
+    <div class="row">
+        <div class="col">
+            {% for optreden in optredens %}
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Naam artiest: {{ optreden.artiestId.naam }}</li>
+                    <li class="list-group-item">Datum optreden: {{ optreden.datum|date('d-m-y') }}</li>
+                    <li class="list-group-item">Tijd optreden: {{ optreden.datum|date(' m:i:s') }}</li>
+                    <li class="list-group-item">Zaal: {{ optreden.zaal }}</li></li>
+                    <li class="list-group-item">Zitplaatsen: {{ optreden.maxZitplaatsen }}</li></li>
+                    <li class="list-group-item">Prijs: &euro;{{ optreden.artiestId.prijs }}</li></li>
+                </ul>
+            </div>
+        </div>
+            {% endfor %}
+    </div>
+
+    <div class="container">
+    <h2>Aankomende optredens</h2>
+    <div class="row">
+        <div class="col">
+            {% for optreden in optredens %}
+            {% if optreden.datum > date() and (optreden.datum < date('+1week')) %}
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Naam artiest: {{ optreden.artiestId.naam }}</li>
+                    <li class="list-group-item">Datum optreden: {{ optreden.datum|date('d-m-y') }}</li>
+                    <li class="list-group-item">Tijd optreden: {{ optreden.datum|date(' m:i:s') }}</li>
+                    <li class="list-group-item">Zaal: {{ optreden.zaal }}</li></li>
+                    <li class="list-group-item">Zitplaatsen: {{ optreden.maxZitplaatsen }}</li></li>
+                    <li class="list-group-item">Prijs: {{ optreden.artiestId.prijs }}</li></li>
+                </ul>
+            </div>
+        </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+    </div>
+
 {% endblock %}
